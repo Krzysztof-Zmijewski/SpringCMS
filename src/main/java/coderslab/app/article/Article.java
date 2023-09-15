@@ -6,6 +6,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,8 +23,8 @@ public class Article {
     private String title;
     @ManyToOne
     private Author author;
-    @ManyToMany
-    private List<Category> categories;
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<Category> categories = new ArrayList<>();
     private String content;
     @Column(name = "created_on")
     private LocalDateTime createdOn;

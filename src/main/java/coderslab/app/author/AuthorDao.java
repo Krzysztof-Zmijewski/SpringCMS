@@ -4,7 +4,9 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -22,5 +24,10 @@ public class AuthorDao {
 
     public void edit (Author entity) {
         em.merge(entity);
+    }
+
+    public List<Author> findAll () {
+        TypedQuery<Author> query = em.createQuery("SELECT a FROM Author a", Author.class);
+        return query.getResultList();
     }
 }
